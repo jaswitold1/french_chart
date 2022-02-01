@@ -13,12 +13,12 @@ body {
   justify-content: space-around;
 }
 .chart {
-  width: 100px;
-  height: 100px;
+  width: 90%;
+  height: 45%;
   border: 1px solid blue;
 }
 .table {
-  width: 100px;
-  height: 100px;
+  width: 90%;
+  height: 45%;
   border: 1px solid green;
 }
