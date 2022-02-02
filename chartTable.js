@@ -6,13 +6,13 @@ const chartLabelRender = () => {
     .then((resp) => resp.json())
     .then((resp) => {
       ////CHART
-
+      //chart html
       document.querySelector(".placeholder").innerHTML = `
             <div class='chart'>
             <canvas id="myChart" width="400" height="300"></canvas>
             </div>
             <div class='table'></div>`;
-
+      //chart config
       const ctx = document.getElementById("myChart").getContext("2d");
       const labels = [
         "0-9",
@@ -26,7 +26,7 @@ const chartLabelRender = () => {
         "80-89",
         "90-99",
       ];
-
+      //chart dataset mapping
       let dataSetFinal = [];
       labels.forEach((el, i) => {
         dataSetFinal.push(
@@ -39,7 +39,7 @@ const chartLabelRender = () => {
             }).length
         );
       });
-
+      //chart create
       const myChart = new Chart(ctx, {
         type: "bar",
         data: {
@@ -87,7 +87,7 @@ const chartLabelRender = () => {
       });
 
       ////TABLE
-
+      //table html
       document.querySelector(
         ".table"
       ).innerHTML = `<table><thead><tr><th colspan="3">10 oldest men data</th>
@@ -117,5 +117,14 @@ const chartLabelRender = () => {
         `;
     });
 };
+////BUTTON
+const button = document.createElement("button");
+const node = document.createTextNode("LOAD");
+button.appendChild(node);
 
-chartLabelRender();
+const element = document.querySelector(".placeholder");
+element.appendChild(button);
+
+document.querySelector("button").onclick = function () {
+  chartLabelRender();
+};
