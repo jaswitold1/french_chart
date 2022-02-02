@@ -1,16 +1,15 @@
-const chartRender = () => {
+const chartLabelRender = () => {
   let loader = `LOADING`;
-  document.querySelector(".chart").innerText = loader;
+  document.querySelector(".placeholder").innerText = loader;
 
   fetch("https://randomuser.me/api/?results=1000&gender=male&nat=fr")
     .then((resp) => resp.json())
     .then((resp) => {
-      document.querySelector(".chart").innerHTML = `
+      document.querySelector(".placeholder").innerHTML = `
             <div class='chart'>
-              <canvas id="myChart" width="400" height="300"></canvas>
+            <canvas id="myChart" width="400" height="300"></canvas>
             </div>
-            
-            `;
+            <div class='table'></div>`;
 
       const ctx = document.getElementById("myChart").getContext("2d");
       const labels = [
@@ -29,16 +28,16 @@ const chartRender = () => {
       let dataSetFinal = [];
       labels.forEach((el, i) => {
         dataSetFinal.push(
-          [...resp.results]
+          resp.results
             .map((el) => {
               return el.dob.age;
             })
             .filter((el) => {
-              return el > i * 10 && el <= i * 10 + 9;
+              return el >= i * 10 && el <= i * 10 + 9;
             }).length
         );
       });
-      console.log(dataSetFinal);
+
       const myChart = new Chart(ctx, {
         type: "bar",
         data: {
@@ -84,7 +83,49 @@ const chartRender = () => {
           },
         },
       });
+
+      ////TABLE
+
+      let tableFinalData = resp.results
+        .sort((a, b) => {
+          return b.dob.age - a.dob.age;
+        })
+        .slice(0, 10);
+      console.log(
+        resp.results
+          .sort((a, b) => {
+            return b.dob.age - a.dob.age;
+          })
+          .slice(0, 10)
+      );
+      document.querySelector(
+        ".table"
+      ).innerHTML = `<table><thead><tr><th colspan="3">10 oldest men data</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            <th colspan="1">age</th>
+            <th colspan="1">first name</th>
+            <th colspan="1">last name</th>
+            </tr>
+            
+              ${resp.results
+                .sort((a, b) => {
+                  return b.dob.age - a.dob.age;
+                })
+                .slice(0, 10)
+                .map((el, i) => {
+                  return `<tr>
+                    <td>${el.dob.age}</td>
+                    <td>${el.name.first}</td>
+                    <td>${el.name.last}</td>
+                </tr>`;
+                })}
+            </tbody>
+          </table>
+        `;
     });
 };
 
-chartRender();
+chartLabelRender();

@@ -5,7 +5,7 @@ body {
 }
 .placeholder {
   width: 90vw;
-  height: 600px;
+  height: 620px;
   border: 1px solid red;
   display: flex;
   flex-direction: column;
@@ -15,10 +15,21 @@ body {
 .chart {
   width: 90%;
   height: 45%;
-  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
 }
 .table {
   width: 90%;
-  height: 45%;
+  height: 47%;
   border: 1px solid green;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  border: 1px solid black;
+}
+th,
+tr,
+td {
+  border: 1px solid black;
 }

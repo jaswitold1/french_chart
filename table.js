@@ -8,8 +8,6 @@ const tableRender = () => {
       (resp) =>
         (document.querySelector(".table").innerText = `
         
-          ${resp.info.seed}
-        
         `)
     );
 };
