@@ -5,6 +5,8 @@ const chartLabelRender = () => {
   fetch("https://randomuser.me/api/?results=1000&gender=male&nat=fr")
     .then((resp) => resp.json())
     .then((resp) => {
+      ////CHART
+
       document.querySelector(".placeholder").innerHTML = `
             <div class='chart'>
             <canvas id="myChart" width="400" height="300"></canvas>
@@ -86,18 +88,6 @@ const chartLabelRender = () => {
 
       ////TABLE
 
-      let tableFinalData = resp.results
-        .sort((a, b) => {
-          return b.dob.age - a.dob.age;
-        })
-        .slice(0, 10);
-      console.log(
-        resp.results
-          .sort((a, b) => {
-            return b.dob.age - a.dob.age;
-          })
-          .slice(0, 10)
-      );
       document.querySelector(
         ".table"
       ).innerHTML = `<table><thead><tr><th colspan="3">10 oldest men data</th>
